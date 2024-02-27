@@ -171,6 +171,24 @@ pub struct TorrentDownload {
 }
 
 impl TorrentDownload {
+    pub fn new(urls: Option<String>, torrents: Option<Vec<u8>>) -> Self {
+        Self {
+            urls,
+            torrents,
+            savepath: None,
+            cookie: None,
+            category: None,
+            skip_checking: None,
+            paused: None,
+            root_folder: None,
+            rename: None,
+            upload_limit: None,
+            download_limit: None,
+            automatic_management: None,
+            sequential_download: None,
+            first_last_piece_prio: None,
+        }
+    }
     pub async fn download(&self, api: &Api) -> Result<(), error::Error> {
         api.add_new_torrent(&self).await
     }
