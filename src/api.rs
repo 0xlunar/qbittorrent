@@ -257,8 +257,8 @@ impl Api {
         Ok(())
     }
 
-    pub async fn set_file_priority(&self, hash: &Hash, id: i64, priority: u8) -> Result<(), error::Error> {
-        let id = id.to_string();
+    pub async fn set_file_priority(&self, hash: &Hash, ids: Vec<i64>, priority: u8) -> Result<(), error::Error> {
+        let id = ids.iter().map(|i| i.to_string()).collect::<Vec<String>>().join("|");
         let priority = priority.to_string();
         let addr = push_own!(
             self.address,
