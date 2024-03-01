@@ -270,6 +270,7 @@ impl Api {
         let res = self
             .client
             .post(&addr)
+            .form(&payload)
             .headers(self.make_headers()?)
             .send()
             .await?;
