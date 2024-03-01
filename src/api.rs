@@ -275,9 +275,6 @@ impl Api {
             .send()
             .await?;
 
-        println!("Status: {}", res.status());
-        println!("Content: {}", res.text().await?);
-
         Ok(())
     }
 }
