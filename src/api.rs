@@ -272,9 +272,10 @@ impl Api {
             .post(&addr)
             .headers(self.make_headers()?)
             .send()
-            .await?
-            .bytes()
             .await?;
+
+        println!("Status: {}", res.status());
+        println!("Content: {}", res.text().await?);
 
         Ok(())
     }
