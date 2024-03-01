@@ -272,7 +272,7 @@ impl Api {
 
         let res = self
             .client
-            .get(&addr)
+            .post(&addr)
             .headers(self.make_headers()?)
             .send()
             .await?
