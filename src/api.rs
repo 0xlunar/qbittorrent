@@ -257,15 +257,15 @@ impl Api {
         Ok(())
     }
 
-    pub async fn set_file_priority(&self, hash: &Hash, ids: Vec<usize>, priority: u8) -> Result<(), error::Error> {
-        let ids = ids.iter().map(|i| i.to_string()).collect::<Vec<String>>().join("|");
+    pub async fn set_file_priority(&self, hash: &Hash, id: i64, priority: u8) -> Result<(), error::Error> {
+        let id = id.to_string();
         let priority = priority.to_string();
         let addr = push_own!(
             self.address,
             "/api/v2/torrents/filePrio?hash=",
             &hash.hash,
             "&id=",
-            &ids,
+            &id,
             "&priority=",
             &priority
         );
