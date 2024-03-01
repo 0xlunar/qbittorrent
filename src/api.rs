@@ -262,13 +262,10 @@ impl Api {
         let priority = priority.to_string();
         let addr = push_own!(
             self.address,
-            "/api/v2/torrents/filePrio?hash=",
-            &hash.hash,
-            "&id=",
-            &id,
-            "&priority=",
-            &priority
+            "/api/v2/torrents/filePrio"
         );
+
+        let payload = [("hash", hash.hash.as_str()),("id", id.as_str()),("priority", priority.as_str())];
 
         let res = self
             .client
