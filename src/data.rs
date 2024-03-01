@@ -359,6 +359,8 @@ pub enum ConnectionStatus {
 /// ```
 #[derive(Debug, Deserialize, Serialize)]
 pub(crate) struct TorrentInfoSerde {
+    #[serde(default)]
+    index: i64,
     name: String,
     size: i64,
     progress: f64,
@@ -371,6 +373,7 @@ impl<'a> TorrentInfoSerde {
     pub fn into_info(self, hash: &'a Hash) -> TorrentInfo<'a> {
         TorrentInfo {
             hash,
+            index: self.index,
             name: self.name,
             size: self.size,
             progress: self.progress,
@@ -422,6 +425,8 @@ pub enum AlternateLimits {
 #[derive(Debug, Serialize, Getters)]
 pub struct TorrentInfo<'a> {
     hash: &'a Hash,
+    #[serde(default)]
+    index: i64,
     name: String,
     size: i64,
     progress: f64,
