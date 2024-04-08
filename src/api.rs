@@ -277,4 +277,25 @@ impl Api {
 
         Ok(())
     }
+
+    pub async fn delete_torrents(&self, hashes: Vec<&Hash>, delete_files: bool) -> Result<(), error::Error> {
+        // let hashes = hashes.iter().map(|h| h.as_str()).collect::<Vec<&str>>().join("|");
+        let hashes = hashes.join("|");
+        let addr = push_own!(
+            self.address,
+            "/api/v2/torrents/delete"
+        );
+
+        let payload = [("hashes", hashes),("deleteFiles", delete_files.to_string())];
+
+        let res = self
+            .client
+            .post(&addr)
+            .form(&payload)
+            .headers(self.make_headers()?)
+            .send()
+            .await?;
+
+        Ok(())
+    }
 }
