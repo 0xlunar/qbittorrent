@@ -279,8 +279,7 @@ impl Api {
     }
 
     pub async fn delete_torrents(&self, hashes: Vec<&Hash>, delete_files: bool) -> Result<(), error::Error> {
-        // let hashes = hashes.iter().map(|h| h.as_str()).collect::<Vec<&str>>().join("|");
-        let hashes = hashes.join("|");
+        let hashes = hashes.iter().map(|h| h.as_str()).collect::<Vec<&str>>().join("|");
         let addr = push_own!(
             self.address,
             "/api/v2/torrents/delete"
