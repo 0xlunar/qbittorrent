@@ -64,11 +64,11 @@ Torrent management
 	✅ Get torrent contents
 	❌ Get torrent pieces' states
 	❌ Get torrent pieces' hashes
-	❌ Pause torrents
+	✅ Pause torrents
 	✅ Resume torrents
-	❌ Delete torrents
+	✅ Delete torrents
 	❌ Recheck torrents
-	❌ Reannounce torrents
+	✅ Reannounce torrents
 	❌ Edit trackers
 	❌ Remove trackers
 	❌ Add peers
@@ -78,7 +78,7 @@ Torrent management
 	❌ Decrease torrent priority
 	❌ Maximal torrent priority
 	❌ Minimal torrent priority
-	❌ Set file priority
+	✅ Set file priority
 	❌ Get torrent download limit
 	❌ Set torrent download limit
 	❌ Set torrent share limit
