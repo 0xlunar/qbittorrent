@@ -297,4 +297,44 @@ impl Api {
 
         Ok(())
     }
+
+    pub async fn pause_torrents(&self, hashes: Vec<&Hash>) -> Result<(), error::Error> {
+        let hashes = hashes.iter().map(|h| h.as_str()).collect::<Vec<&str>>().join("|");
+        let addr = push_own!(
+            self.address,
+            "/api/v2/torrents/pause"
+        );
+
+        let payload = [("hashes", hashes)];
+
+        let res = self
+            .client
+            .post(&addr)
+            .form(&payload)
+            .headers(self.make_headers()?)
+            .send()
+            .await?;
+
+        Ok(())
+    }
+
+    pub async fn reannounce_torrents(&self, hashes: Vec<&Hash>) -> Result<(), error::Error> {
+        let hashes = hashes.iter().map(|h| h.as_str()).collect::<Vec<&str>>().join("|");
+        let addr = push_own!(
+            self.address,
+            "/api/v2/torrents/reannounce"
+        );
+
+        let payload = [("hashes", hashes)];
+
+        let res = self
+            .client
+            .post(&addr)
+            .form(&payload)
+            .headers(self.make_headers()?)
+            .send()
+            .await?;
+
+        Ok(())
+    }
 }
