@@ -511,3 +511,29 @@ impl<'a> From<&'a Vec<Hash>> for SerdeHashes<String> {
         }
     }
 }
+
+impl AsRef<str> for State {
+    fn as_ref(&self) -> &str {
+        match self {
+            State::Error => "error",
+            State::MissingFiles => "missingFiles",
+            State::Uploading => "uploading",
+            State::PausedUP => "pausedUP",
+            State::QueuedUP => "queuedUP",
+            State::StalledUP => "stalledUP",
+            State::CheckingUP => "checkingUP",
+            State::ForcedUP => "forcedUP",
+            State::Allocating => "allocating",
+            State::Downloading => "downloading",
+            State::MetaDL => "metaDL",
+            State::PausedDL => "pausedDL",
+            State::QueuedDL => "queuedDL",
+            State::StalledDL => "stalledDL",
+            State::CheckingDL => "checkingDL",
+            State::ForceDL => "forcedDL",
+            State::CheckingResumeData => "checkingResumeData",
+            State::Moving => "moving",
+            State::Unknown => "unkown",
+        }
+    }
+}
