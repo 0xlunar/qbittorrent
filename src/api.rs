@@ -24,8 +24,8 @@ impl Api {
         let mut headers = reqwest::header::HeaderMap::new();
         headers.insert("Referer", address.parse()?);
 
-        let addr = push_own! {address, "/api/v2/auth/login", "?username=", username, "&password=", password};
-        let response = client.get(&addr).headers(headers).send().await?;
+        let addr = push_own! {address, "/api/v2/auth/login"};
+        let response = client.post(&addr).form(&[("username", username),("password", password)]).headers(headers).send().await?;
 
         let headers = match response.headers().get("set-cookie") {
             Some(header) => header,
