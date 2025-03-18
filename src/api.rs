@@ -19,7 +19,7 @@ pub struct Api {
 
 impl Api {
     pub async fn new(username: &str, password: &str, address: &str) -> Result<Self, error::Error> {
-        let client = reqwest::Client::new();
+        let client = reqwest::ClientBuilder::new().cookie_store(true).build()?;
 
         let mut headers = reqwest::header::HeaderMap::new();
         headers.insert("Referer", address.parse()?);
@@ -192,7 +192,7 @@ impl Api {
         let addr = push_own! {self.address, "/api/v2/torrents/add"};
 
         let mut headers = reqwest::header::HeaderMap::new();
-        headers.insert("cookie", self.cookie.parse()?);
+        // headers.insert("cookie", self.cookie.parse()?);
         headers.insert("Referer", self.address.parse()?);
 
         let res = self
@@ -212,7 +212,7 @@ impl Api {
     /// Make the authentication headers for each request
     pub(crate) fn make_headers(&self) -> Result<reqwest::header::HeaderMap, error::Error> {
         let mut headers = reqwest::header::HeaderMap::new();
-        headers.insert("cookie", self.cookie.parse()?);
+        // headers.insert("cookie", self.cookie.parse()?);
         Ok(headers)
     }
 
