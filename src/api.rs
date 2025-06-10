@@ -1,4 +1,4 @@
-use reqwest;
+use rquest;
 use serde_json;
 use std::collections::BTreeMap;
 
@@ -14,14 +14,14 @@ use super::queries::*;
 pub struct Api {
     pub(crate) cookie: String,
     pub(crate) address: String,
-    pub(crate) client: reqwest::Client,
+    pub(crate) client: rquest::Client,
 }
 
 impl Api {
     pub async fn new(username: &str, password: &str, address: &str) -> Result<Self, error::Error> {
-        let client = reqwest::ClientBuilder::new().cookie_store(true).build()?;
+        let client = rquest::ClientBuilder::new().cookie_store(true).build()?;
 
-        let mut headers = reqwest::header::HeaderMap::new();
+        let mut headers = rquest::header::HeaderMap::new();
         headers.insert("Referer", address.parse()?);
 
         let addr = push_own! {address, "/api/v2/auth/login"};
@@ -191,7 +191,7 @@ impl Api {
     pub async fn add_new_torrent(&self, data: &TorrentDownload) -> Result<(), error::Error> {
         let addr = push_own! {self.address, "/api/v2/torrents/add"};
 
-        let mut headers = reqwest::header::HeaderMap::new();
+        let mut headers = rquest::header::HeaderMap::new();
         // headers.insert("cookie", self.cookie.parse()?);
         headers.insert("Referer", self.address.parse()?);
 
@@ -210,8 +210,8 @@ impl Api {
     }
 
     /// Make the authentication headers for each request
-    pub(crate) fn make_headers(&self) -> Result<reqwest::header::HeaderMap, error::Error> {
-        let mut headers = reqwest::header::HeaderMap::new();
+    pub(crate) fn make_headers(&self) -> Result<rquest::header::HeaderMap, error::Error> {
+        let mut headers = rquest::header::HeaderMap::new();
         // headers.insert("cookie", self.cookie.parse()?);
         Ok(headers)
     }
